@@ -3,17 +3,21 @@ import Tesseract from "tesseract.js";
 
 const Test = () => {
   const [text, setText] = React.useState("");
-  const [img, setImg] = useState();
+  const [imageSrc, setImageSrc] = useState();
 
   const fileInputRef = React.useRef(null);
 
   const handleFileSelect = (e) => {
     const file = e.target.files[0];
-    setImg(file);
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setImageSrc(e.target.result);
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleClick = () => {
-    Tesseract.recognize(img).then(({ data: { text } }) => {
+    Tesseract.recognize(imageSrc).then(({ data: { text } }) => {
       setText(text);
     });
   };
@@ -30,7 +34,11 @@ const Test = () => {
           onChange={handleFileSelect}
         />
       </form>
-      {img != null ? <img src={img.name} width="400" height="300" /> : <></>}
+      {imageSrc != null ? (
+        <img src={imageSrc} width="400" height="300" />
+      ) : (
+        <></>
+      )}
       <br />
       <button onClick={handleClick}>Extract text</button>
       <br />
