@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Tesseract from "tesseract.js";
 
-const Test = () => {
+const Test = ({ temperature }) => {
   const [text, setText] = React.useState("");
   const [imageSrc, setImageSrc] = useState();
+  console.log("temperature: " + temperature);
 
   const fileInputRef = React.useRef(null);
 
@@ -43,8 +44,21 @@ const Test = () => {
       <button onClick={handleClick}>Extract text</button>
       <br />
       <p>{text}</p>
+
+      <p>The current temperature is {temperature}</p>
     </div>
   );
 };
 
 export default Test;
+
+// export async function getServerSideProps() {
+//   // Fetch the temperature data from the ESP32's endpoint
+//   const response = await fetch("http://localhost:3000//api/temperature", {
+//     method: "GET",
+//   });
+
+//   var res = await response.json();
+//   // Pass the temperature data as a prop to the component
+//   return { props: { temperature: res.temperature } };
+// }
