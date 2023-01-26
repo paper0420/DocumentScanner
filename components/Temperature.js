@@ -6,7 +6,9 @@ function Temperature() {
   useEffect(() => {
     async function fetchTemperature() {
       try {
-        const res = await fetch("http://localhost:3000/api/setTemperature");
+        const res = await fetch(
+          "https://https://document-scanner-ten.vercel.app/api/setTemperature"
+        );
         const data = await res.json();
         setTemperature(data.temperature);
       } catch (err) {
