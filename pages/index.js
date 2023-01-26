@@ -2,15 +2,11 @@ import Head from "next/head";
 import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
 import Test from "../components/Test";
+import Temperature from "../components/Temperature";
 
 const inter = Inter({ subsets: ["latin"] });
 
-async function getTemprature() {
-  var response = await fetch("/getTemprature", { method: "POST" }).json();
-  console.log(response.temperature);
-}
-
-export default async function Home() {
+export default function Home() {
   return (
     <>
       <Head>
@@ -24,10 +20,9 @@ export default async function Home() {
           <h1>Scan documents</h1>
         </div>
         <div className={styles.center}>
-          <Test temperature={123} />
+          <Test />
         </div>
-
-        <button onClick={await getTemprature()}></button>
+        <Temperature />
       </main>
     </>
   );

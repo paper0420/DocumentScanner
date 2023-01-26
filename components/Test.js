@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import Tesseract from "tesseract.js";
 
-const Test = ({ temperature }) => {
+const Test = () => {
   const [text, setText] = React.useState("");
   const [imageSrc, setImageSrc] = useState();
-  console.log("temperature: " + temperature);
 
   const fileInputRef = React.useRef(null);
 
@@ -44,8 +43,6 @@ const Test = ({ temperature }) => {
       <button onClick={handleClick}>Extract text</button>
       <br />
       <p>{text}</p>
-
-      <p>The current temperature is {temperature}</p>
     </div>
   );
 };
