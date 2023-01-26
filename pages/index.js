@@ -1,12 +1,16 @@
 import Head from "next/head";
-import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "../styles/Home.module.css";
 import Test from "../components/Test";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+async function getTemprature() {
+  var response = await fetch("/getTemprature", { method: "POST" }).json();
+  console.log(response.temperature);
+}
+
+export default async function Home() {
   return (
     <>
       <Head>
@@ -20,8 +24,10 @@ export default function Home() {
           <h1>Scan documents</h1>
         </div>
         <div className={styles.center}>
-          <Test />
+          <Test temperature={123} />
         </div>
+
+        <button onClick={await getTemprature()}></button>
       </main>
     </>
   );
